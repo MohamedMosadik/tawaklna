@@ -10,6 +10,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -17,20 +18,20 @@ class MyApp extends StatelessWidget {
       builder: (context, AsyncSnapshot snapshot) {
         // Show splash screen while waiting for app resources to load:
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
+          return const MaterialApp(
               debugShowCheckedModeBanner: false,
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,
               ],
               supportedLocales: [
-                const Locale('en', ''), // English, no country code
-                const Locale('ar', ''), // Arabic, no country code
-                const Locale('fr', ''),
-                const Locale('pt_BR', ''),
+                Locale('en', ''), // English, no country code
+                Locale('ar', ''), // Arabic, no country code
+                Locale('fr', ''),
+                Locale('pt_BR', ''),
               ],
               home: Splash());
         } else {
-          return MaterialApp(
+          return const MaterialApp(
             debugShowCheckedModeBanner: false,
             home: MyHomePage(title: 'Flutter Demo Home Page'),
           );
@@ -53,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentPage = 0;
   PageController controller = PageController(initialPage: 0, keepPage: true);
   late DateTime currentBackPressTime;
+  bool pressed = true;
   @override
   void initState() {
     super.initState();
@@ -69,15 +71,17 @@ class _MyHomePageState extends State<MyHomePage> {
           extendBody: true,
           bottomNavigationBar: bottomAppBar((int position) {
             controller.animateToPage(position,
-                duration: Duration(milliseconds: 1), curve: Curves.linear);
+                duration: const Duration(milliseconds: 1),
+                curve: Curves.linear);
           }, controller, currentPage, context),
           body: WillPopScope(
             onWillPop: onWillPop,
             child: PageView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: controller,
-              children: [
+              children: const [
                 Home(),
+                PlaceholderWidget(),
                 PlaceholderWidget(),
                 PlaceholderWidget(),
                 PlaceholderWidget(),
@@ -145,8 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+    if (now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       return Future.value(false);
     }
     return Future.value(true);
@@ -161,14 +164,16 @@ Widget bottomAppBar(Function(int x) _selectionFunction,
     elevation: 5,
     showUnselectedLabels: true,
     currentIndex: currentPage,
-    selectedItemColor: Color(0xffffffff),
-    unselectedItemColor: Color(0xccffffff),
+    selectedItemColor: const Color(0xffffffff),
+    unselectedItemColor: const Color(0xccffffff),
     items: [
       BottomNavigationBarItem(
-        icon: Image.asset(currentPage == 0 ? "tabHomeS" : "tabHome",
-            width: 23, height: 23),
-        title: Padding(
-          padding: const EdgeInsets.only(top: 7),
+        icon: Image.asset(
+            currentPage == 0 ? "assets/iconBar/3.png" : "assets/iconBar/8.png",
+            width: 23,
+            height: 23),
+        title: const Padding(
+          padding: EdgeInsets.only(top: 7),
           child: Text('الرئسية',
               style:
                   TextStyle(color: Colors.black, fontFamily: 'Arabic-Medium')),
@@ -176,48 +181,50 @@ Widget bottomAppBar(Function(int x) _selectionFunction,
       ),
       BottomNavigationBarItem(
           icon: Image.asset(
-            currentPage == 1 ? "superior_fill_icon" : "superior_icon",
+            currentPage == 1 ? "assets/iconBar/1.png" : "assets/iconBar/6.png",
             width: 23,
             height: 23,
           ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 7),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 7),
             child: Text('الخدمات',
                 style: TextStyle(
                     color: Colors.black, fontFamily: 'Arabic-Medium')),
           )),
       BottomNavigationBarItem(
           icon: Image.asset(
-            currentPage == 2 ? "tabNotificationS" : "tabNotification",
+            currentPage == 2 ? "assets/iconBar/2.png" : "assets/iconBar/7.png",
             width: 23,
             height: 23,
           ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 7),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 7),
             child: Text('المحفظة الرقمية',
                 style: TextStyle(
-                    color: Colors.black, fontFamily: 'Arabic-Medium')),
+                    color: Colors.black,
+                    fontFamily: 'Arabic-Medium',
+                    fontSize: 12)),
           )),
       BottomNavigationBarItem(
           icon: Image.asset(
-            currentPage == 3 ? "tabAccountS" : "tabAccount",
+            currentPage == 3 ? "assets/iconBar/4.png" : "assets/iconBar/9.png",
             width: 23,
             height: 23,
           ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 7),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 7),
             child: Text('لوحة البيانات',
                 style: TextStyle(
                     color: Colors.black, fontFamily: 'Arabic-Medium')),
           )),
       BottomNavigationBarItem(
           icon: Image.asset(
-            currentPage == 3 ? "tabAccountS" : "tabAccount",
+            currentPage == 4 ? "assets/iconBar/5.png" : "assets/iconBar/10.png",
             width: 23,
             height: 23,
           ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 7),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 7),
             child: Text('حسابي',
                 style: TextStyle(
                     color: Colors.black, fontFamily: 'Arabic-Medium')),
@@ -228,14 +235,16 @@ Widget bottomAppBar(Function(int x) _selectionFunction,
 }
 
 class Splash extends StatelessWidget {
+  const Splash({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-            image: new DecorationImage(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/images/splashTwaklana.jpeg")),
           ),

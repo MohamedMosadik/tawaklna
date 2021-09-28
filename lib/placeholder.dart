@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PlaceholderWidget extends StatelessWidget {
+  const PlaceholderWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,14 +11,14 @@ class PlaceholderWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 300,
             ),
-            CircularProgressIndicator(),
+            const CircularProgressIndicator(),
             Expanded(
               child: Image(
-                image: AssetImage(
-                  'assets/image/triangle.png',
+                image: const AssetImage(
+                  'assets/images/triangle.png',
                 ),
                 // height: 300,
                 width: MediaQuery.of(context).size.width,
