@@ -152,7 +152,7 @@ class _HomeState extends State<Home> {
                 children: [
                   Center(
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(15),
                         child: const Image(
                           image: AssetImage('assets/images/finalgit.gif'),
                           width: 400,
@@ -160,7 +160,7 @@ class _HomeState extends State<Home> {
                   ),
                   Positioned(
                     top: 35,
-                    left: 80,
+                    left: 70,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

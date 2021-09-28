@@ -91,7 +91,7 @@ class _PassportHealthState extends State<PassportHealth> {
                 ),
               ),
               Positioned(
-                bottom: 95,
+                bottom: 60,
                 left: 20,
                 child: GestureDetector(
                   onTap: () {
