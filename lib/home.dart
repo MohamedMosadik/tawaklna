@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
-
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -112,7 +110,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         const Positioned(
-                          right: 120,
+                          right: 100,
                           top: 150,
                           child: Text(
                             '٢٤٦١٢٤٥١٠٨',
@@ -151,12 +149,22 @@ class _HomeState extends State<Home> {
               Stack(
                 children: [
                   Center(
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: const Image(
-                          image: AssetImage('assets/images/finalgit.gif'),
-                          width: 400,
-                        )),
+                    child: GestureDetector(
+                      onTap: () {
+                        _modalBottomSheetMenu();
+                      },
+                      // child: Container(
+                      //   height: 100,
+                      //   color: Colors.blueAccent,
+                      // )
+
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: const Image(
+                            image: AssetImage('assets/images/finalgit.gif'),
+                            width: 400,
+                          )),
+                    ),
                   ),
                   Positioned(
                     top: 35,
@@ -220,143 +228,6 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-
-              //
-              // Center(
-              //     child: Image(
-              //   image: AssetImage('assets/images/finalgit.gif'),
-              //   // height: 100,
-              // )
-
-              // Container(
-              //   margin: const EdgeInsets.all(20),
-              //   padding: const EdgeInsets.all(20),
-              //   decoration: BoxDecoration(
-              //       borderRadius: const BorderRadius.all(
-              //         Radius.circular(15.0),
-              //       ),
-              //       boxShadow: [
-              //         BoxShadow(
-              //           color: Colors.grey.withOpacity(0.5),
-              //           spreadRadius: 5,
-              //           blurRadius: 7,
-              //           offset:
-              //               const Offset(0, 3), // changes position of shadow
-              //         ),
-              //       ],
-              //       gradient: const LinearGradient(
-              //         begin: Alignment.topRight,
-              //         end: Alignment.bottomLeft,
-              //         colors: [
-              //           Color(0xE10C864D),
-              //           Color(0xFF054921),
-              //         ],
-              //       )
-              //       // color: Color(0xFF054921),
-              //       ),
-              //   width: MediaQuery.of(context).size.width * 0.9,
-              //   child: Row(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         Expanded(
-              //           child: Center(
-              //             child: Column(
-              //               children: [
-              //                 Container(
-              //                   decoration: const BoxDecoration(
-              //                       image: DecorationImage(
-              //                     image:
-              //                         AssetImage('assets/images/Qrcode.gif'),
-              //                   )),
-              //                   height: 100,
-              //                   width: 100,
-              //                   // child: RadialPainter(
-              //                   //     80.0,
-              //                   //     Color(0xff334556, StrokeCap.square,
-              //                   //         PaintingStyle.stroke, 20.0, 10.0)),
-              //
-              //                   // child: const Image(
-              //                   //   image: AssetImage('assets/images/20.png'),
-              //                   //   height: 100,
-              //                   //   fit: BoxFit.fill,
-              //                   // ),
-              //                   // (_controller != null
-              //                   //     ? VideoPlayer(
-              //                   //   _controller,
-              //                   // )
-              //                   //     : Container()),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
-              //         ),
-              //         const SizedBox(
-              //           width: 10,
-              //         ),
-              //         Column(
-              //           crossAxisAlignment: CrossAxisAlignment.start,
-              //           children: [
-              //             const Text('محصّن',
-              //                 style: TextStyle(
-              //                   color: Colors.white,
-              //                   fontSize: 15,
-              //                   fontWeight: FontWeight.bold,
-              //                   fontFamily: 'Arabic-Medium',
-              //                 )),
-              //             const SizedBox(
-              //               width: 120,
-              //             ),
-              //             const SizedBox(
-              //               height: 10,
-              //             ),
-              //             const Text(
-              //               'أكمل جرعات لقاح كورونا (كوفيد 19)',
-              //               style: TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 12,
-              //               ),
-              //               maxLines: 3,
-              //             ),
-              //             const SizedBox(
-              //               height: 10,
-              //             ),
-              //             Text(
-              //               " آخر تحديث : $formatter",
-              //               style: const TextStyle(
-              //                 color: Colors.white,
-              //                 fontSize: 12,
-              //               ),
-              //               maxLines: 3,
-              //             ),
-              //           ],
-              //         ),
-              //         const SizedBox(
-              //           width: 20,
-              //         ),
-              //
-              //         // FloatingActionButton(
-              //         //   onPressed: () {
-              //         //     // createVideo();
-              //         //     _controller.play();
-              //         //   },
-              //         //   child: Icon(Icons.play_arrow),
-              //         // )
-              //         GestureDetector(
-              //           onTap: () {
-              //             var now = DateTime.now();
-              //             DateFormat('EEE d MMM kk:mm').format(now);
-              //           },
-              //           child: Container(
-              //             color: Colors.transparent,
-              //             child: const Icon(
-              //               Icons.refresh,
-              //               color: Colors.white,
-              //             ),
-              //           ),
-              //         ),
-              //       ]),
-              // ),
-
               service(context, 10),
               Container(
                 margin: const EdgeInsets.all(20),
@@ -559,443 +430,262 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  void _modalBottomSheetMenu() {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.5,
+            maxHeight: MediaQuery.of(context).size.height * 0.95),
+        builder: (builder) {
+          var now = DateTime.now();
+          var formatter = DateFormat('EEE d MMM kk:mm').format(now);
+          return Container(
+            color: Colors.transparent,
+            padding: EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Center(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        // color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.grey,
+                      ),
+                      height: 5,
+                      width: 50,
+                    ),
+                  ),
+                  Container(
+                      decoration: BoxDecoration(
+                        // color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.15),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            margin: const EdgeInsets.all(20),
+                            decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(29))),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.refresh),
+                                const Center(
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/second.gif'),
+                                    width: 400,
+                                  ),
+                                ),
+                                Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      const Text('لم تثبت إصابته'),
+                                      Text(
+                                        " آخر تحديث : $formatter",
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontFamily: 'Arabic-Medium',
+                                        ),
+                                        maxLines: 3,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                  const Text(
+                    'الوضع الصحي',
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Arabic-Medium'),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'تعتبر الأكوادالملونة طريقة لحفظ الخصوصية ومعرفه الوضع الصحي للمستخدم وفقا للبيانات الرسمية التي تصلنا من وزارة الصحة، كما أنها تحفظ البيانات الشخصية بتشفير عالي.',
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w200,
+                        fontFamily: 'Arabic-Medium'),
+                  ),
+                  dataForBottomSheet(
+                      'محصن',
+                      'محصن : \n يوضح أن المستخدم قد أكمل جرعات لقاح (كوفيد-١٩). \n \n محصن جرعة أولي : \n يوضح أن المستخدم قد حصل علي حزء من اللقاحات ويتم عرضها بعد مرور ١٤ يوم من الحصول علي الجرعة وتستمر لمدة ١٨٠ يوما ما لم يكمل المستفيد كامل الجرعات او عند ثبوت إصابته. \n محصن متعافي : \n  يوضح أن المستخدم تعافي من اصابته وتكونت لديه مناعة طبيعية حيث تستمر لمدة ١٨٠ يوما مالم يتعرض المستفيد لأصابتة أخري أو عند حصوبة علي اللقاح. \n مسثني لأسباب طبية : \n يوضح أن المستفيد أعتمد من قبل لجنة الاستثناءات الطبية في الصحة العامة وأنه مستثني من تلقي لقاح كورونا.',
+                      'assets/iconCode/16.png',
+                      Colors.green,
+                      Colors.greenAccent,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'لم تثبت إصابته',
+                      'اللون الآبيض يوضح أن المستفيد أكبر من ١٢ سنة ولم تثبت إصابتة ولم يتلق لقاح كرونا',
+                      'assets/iconCode/16.png',
+                      Colors.white,
+                      Colors.white,
+                      Colors.green),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'لم تثبت إصابته',
+                      'اللون الأخضر يوضح أن المستفيد ذو من ١٢ سنة أو اقل ولم تثبت إصابتة ولم يتلق لقاح كرونا',
+                      'assets/iconCode/16.png',
+                      Colors.greenAccent,
+                      Colors.green,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'مخالط',
+                      'اللون البرتقالي يوضح أن المستفيد تم اكتشاف مخالتطه لشخص مصاب او يسكن معه في نفس السكن ويجب عليه الالتزام بالحجر الصحي المنزلي لمدخه ٧ ايام في حاله وجود نتيجه فحص سلبيه بعد اليوم الرابع من المخالصة او ١٠ ايام ',
+                      'assets/iconCode/16.png',
+                      Colors.amber,
+                      Colors.amberAccent,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'المصاب',
+                      'اللون البني يوضح أن المستخدم تثبت إصابته بفيروس كرونا وفقا للبيانات الرسمية التي تصلنا من وزارة الصحة',
+                      'assets/iconCode/16.png',
+                      Colors.brown,
+                      Colors.brown,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'حجر منزلي',
+                      'اللون الازرق يوضح أن المستفيد قادم من سفر وعليه: \n -اجراء فحص كورونا مع بداية اليوم السادس من الوصول \n -اتمام مدخ ٧ ايام من الحجر المنزلي علي ان تكون النتيجه سلبية. \n -الانتظار جتي يتم تحديث الحالة الصحية.',
+                      'assets/iconCode/16.png',
+                      Colors.blue,
+                      Colors.lightBlue,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'حجر مؤسسي',
+                      'اللون البنفسجي يوضح أن المستفيد قادم من سفر، وعليه: \n -إجراء فحصين كورونا ( علي أن تكون النتيجة سلبية) \n -الفحص الاول: خلال ال ٢٤ ساعة الاولي من القدوم. \n -الفحص الثاني : مع بداية اليوم السادس من الوصول. \n - اتمام ٧ ايام من الحجر المؤسسي. \n -الانتظار حتي يتم تحديث الحالة الصحية.',
+                      'assets/iconCode/16.png',
+                      Colors.purple,
+                      Colors.purpleAccent,
+                      Colors.white),
+                  const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  dataForBottomSheet(
+                      'لا يوجد اتصال بالانترنت',
+                      'اللون الرمادي يوضح أن المستخدم لا يوجد لدية اتصال انترنت او لم يحدد موقع سكنه او انه يستخدم شبكه افتراضية خاصيه (VPN).',
+                      'assets/iconCode/16.png',
+                      Colors.grey,
+                      Colors.grey,
+                      Colors.white)
+                ],
+              ),
+            ),
+          );
+        });
+  }
+
+  Padding dataForBottomSheet(String dataFirst, String dataSecond, String image,
+      Color left, Color right, Color iconColor) {
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                dataFirst,
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Arabic-Medium'),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: Text(dataSecond,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[850],
+                        fontWeight: FontWeight.w100,
+                        fontFamily: 'Arabic-Medium')),
+              )
+            ],
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: [left, right],
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            // image: DecorationImage(image: AssetImage(image))),
+            child: Image(
+              image: AssetImage(image),
+              height: 40,
+              color: iconColor,
+              alignment: Alignment.topRight,
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
-//
-// class RadialPainter extends CustomPainter {
-//   final double progress;
-//   final Color color;
-//   final StrokeCap strokeCap;
-//   final PaintingStyle paintingStyle;
-//   final double initialPercentage;
-//   final double totalPercentage;
-//
-//   RadialPainter(this.progress, this.color, this.strokeCap, this.paintingStyle,
-//       this.initialPercentage, this.totalPercentage);
-//
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     Paint paint = Paint()
-//       ..strokeWidth = 10
-//       ..color = color
-//       ..style = paintingStyle
-//       ..strokeCap = strokeCap;
-//
-//     Offset center = Offset(size.width / 2, size.height / 2);
-//     double relativeProgress = 360 * progress;
-//
-//     Rect rect = new Rect.fromCircle(
-//       center: center,
-//       radius: 80.0,
-//     );
-//
-//     var initialPercentage = 10.0;
-//
-//     //SQUARE WITH PATH
-//     var path = Path();
-//     path.lineTo(size.width, 0);
-//     path.lineTo(size.width, size.height);
-//     path.lineTo(size.width / size.width, size.height);
-//     path.lineTo(0, 1);
-//     canvas.drawPath(path, paint);
-//
-//     //SQUARE WITH RECT
-//     final left = 0.0;
-//     final top = 0.0;
-//     final right = size.width;
-//     final bottom = size.height;
-//     final rectx = Rect.fromLTRB(left, top, right, bottom);
-//     canvas.drawRect(rectx, paint);
-//
-//     //CIRCULAR PROGRESS
-//     canvas.drawArc(
-//       Rect.fromCircle(center: center, radius: size.width / 2),
-//       math.radians(-90),
-//       math.radians(-relativeProgress),
-//       false,
-//       paint,
-//     );
-//   }
-//
-//   @override
-//   bool shouldRepaint(CustomPainter oldDelegate) {
-//     return true;
-//   }
-// }
-
-// class HexagonalProgress extends StatefulWidget {
-//   final double size;
-//   final Color backgroundColor;
-//   final Color color;
-//   HexagonalProgress(
-//       {Key? key,
-//       required this.size,
-//       this.backgroundColor = Colors.grey,
-//       this.color = Colors.blue})
-//       : super(key: key);
-//
-//   @override
-//   _HexagonalProgress createState() => new _HexagonalProgress();
-// }
-//
-// class _HexagonalProgress extends State<HexagonalProgress>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController controller;
-//   late Animation animation;
-//
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     controller = new AnimationController(
-//         vsync: this, duration: const Duration(milliseconds: 5000))
-//       ..repeat();
-//     animation = Tween(begin: 0.0, end: 360.0).animate(controller);
-//     controller.addListener(() {
-//       setState(() {});
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Stack(
-//       alignment: Alignment.center,
-//       children: <Widget>[
-//         new CustomPaint(
-//           painter: new _HexagonalCanvas(
-//               progress: animation.value,
-//               backgroundColor: widget.backgroundColor,
-//               color: widget.color),
-//           size: new Size(widget.size, widget.size),
-//         ),
-//         new Text(
-//           '${(animation.value / 360 * 100).round()}%',
-//           style: new TextStyle(
-//               color: Colors.white,
-//               fontSize: widget.size / 5,
-//               fontWeight: FontWeight.bold),
-//         )
-//       ],
-//     );
-//   }
-// }
-//
-// class _HexagonalCanvas extends CustomPainter {
-//   final double progress;
-//   final Color backgroundColor;
-//   final Color color;
-//
-//   _HexagonalCanvas(
-//       {required this.progress,
-//       this.backgroundColor = Colors.grey,
-//       this.color = Colors.blue});
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     var paint = new Paint();
-//     paint
-//       ..color = backgroundColor
-//       ..strokeWidth = size.width / 10
-//       ..strokeCap = StrokeCap.round
-//       ..style = PaintingStyle.stroke;
-//
-//     var path = new Path();
-//     path.moveTo(size.width / 4 * 1, size.height / 4 * 0);
-//     path.lineTo(size.width / 4 * 3, size.height / 4 * 0);
-//     // path.lineTo(size.width / 4 * 4, size.height / 4 * 1);
-//     path.lineTo(size.width / 4 * 4, size.height / 4 * 3);
-//
-//     // path.lineTo(size.width / 4 * 3, size.height / 4 * 4);
-//     path.lineTo(size.width / 4 * 1, size.height / 4 * 4);
-//     // path.lineTo(size.width / 4 * 0, size.height / 4 * 3);
-//     path.lineTo(size.width / 4 * 0, size.height / 4 * 1);
-//     // path.lineTo(size.width / 4 * 1, size.height / 4 * 0);
-//
-//     canvas.drawPath(path, paint);
-//
-//     var angle = 45;
-//     var pathb = new Path();
-//     pathb.moveTo(size.width / 4 * 1, size.height / 4 * 0);
-//
-//     pathb.lineTo(
-//         size.width / 4 * 1 +
-//             ((angle - progress) > 0 ? ((progress) / angle) : 1) *
-//                 size.width /
-//                 2,
-//         size.height / 4 * 0);
-//
-//     if (progress > angle)
-//       pathb.lineTo(
-//           size.width / 4 * 3 +
-//               ((angle * 2 - progress) > 0 ? ((progress - angle) / angle) : 1) *
-//                   size.width /
-//                   4,
-//           size.height / 4 * 0 +
-//               ((angle * 2 - progress) > 0 ? ((progress - angle) / angle) : 1) *
-//                   size.height /
-//                   4);
-//
-//     // if (progress > angle * 2)
-//     //   pathb.lineTo(
-//     //       size.width / 4 * 4,
-//     //       size.height / 4 * 1 +
-//     //           ((angle * 3 - progress) > 0
-//     //                   ? ((progress - angle * 2) / angle)
-//     //                   : 1) *
-//     //               size.height /
-//     //               2);
-//
-//     if (progress > angle * 3)
-//       pathb.lineTo(
-//           size.width / 4 * 4 -
-//               ((angle * 4 - progress) > 0
-//                       ? ((progress - angle * 3) / angle)
-//                       : 1) *
-//                   size.width /
-//                   4,
-//           size.height / 4 * 3 +
-//               ((angle * 4 - progress) > 0
-//                       ? ((progress - angle * 3) / angle)
-//                       : 1) *
-//                   size.height /
-//                   4);
-//
-//     // if (progress > angle * 4)
-//     //   pathb.lineTo(
-//     //       size.width / 4 * 3 -
-//     //           ((angle * 5 - progress) > 0
-//     //                   ? ((progress - angle * 4) / angle)
-//     //                   : 1) *
-//     //               size.width /
-//     //               2,
-//     //       size.height / 4 * 4 +
-//     //           0 *
-//     //               ((angle * 5 - progress) > 0
-//     //                   ? ((progress - angle * 4) / angle)
-//     //                   : 1) *
-//     //               size.height /
-//     //               4);
-//
-//     if (progress > angle * 5)
-//       pathb.lineTo(
-//           size.width / 4 * 1 -
-//               ((angle * 6 - progress) > 0
-//                       ? ((progress - angle * 5) / angle)
-//                       : 1) *
-//                   size.width /
-//                   4,
-//           size.height / 4 * 4 -
-//               ((angle * 6 - progress) > 0
-//                       ? ((progress - angle * 5) / angle)
-//                       : 1) *
-//                   size.height /
-//                   4);
-//
-//     if (progress > angle * 6)
-//       pathb.lineTo(
-//           size.width / 4 * 0 -
-//               0 *
-//                   ((angle * 7 - progress) > 0
-//                       ? ((progress - angle * 6) / 45)
-//                       : 1) *
-//                   size.width /
-//                   4,
-//           size.height / 4 * 3 -
-//               ((angle * 7 - progress) > 0
-//                       ? ((progress - angle * 6) / angle)
-//                       : 1) *
-//                   size.height /
-//                   2);
-//
-//     // if (progress > angle * 7)
-//     //   pathb.lineTo(
-//     //       size.width / 4 * 0 +
-//     //           ((angle * 8 - progress) > 0 ? ((progress - angle * 7) / 45) : 1) *
-//     //               size.width /
-//     //               4,
-//     //       size.height / 4 * 1 -
-//     //           ((angle * 8 - progress) > 0
-//     //                   ? ((progress - angle * 7) / angle)
-//     //                   : 1) *
-//     //               size.height /
-//     //               4);
-//
-//     Rect rect = new Offset(0.0, 0.0) & size;
-//     paint
-//       ..shader = new LinearGradient(
-//               colors: [Colors.yellow, Colors.red],
-//               begin: Alignment.topRight,
-//               end: Alignment.bottomLeft)
-//           .createShader(rect);
-//     canvas.drawPath(
-//         pathb,
-//         paint
-//           ..color = color
-//           ..strokeWidth = size.width / 12);
-//   }
-//
-//   @override
-//   bool shouldRepaint(_HexagonalCanvas oldDelegate) {
-//     return oldDelegate.progress != progress;
-//   }
-// }
-
-// class RectanglePainter extends CustomPainter {
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()
-//       ..color = Colors.blue
-//       ..strokeWidth = 3
-//       ..style = PaintingStyle.stroke;
-//
-//     final a = Offset(size.width * 1 / 50, size.height * 1 / 40);
-//     final b = Offset(size.width * 5.3 / 5, size.height * 3.2 / 3);
-//     final rect = Rect.fromPoints(a, b);
-//
-//     canvas.drawRect(rect, paint);
-//   }
-//
-//   @override
-//   bool shouldRepaint(CustomPainter oldDelegate) => false;
-// }
-
-// class Line extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() => _LineState();
-// }
-//
-// class _LineState extends State<Line> with SingleTickerProviderStateMixin {
-//   double _progress = 0.0;
-//   late Animation<double> animation;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     var controller = AnimationController(
-//         duration: Duration(milliseconds: 3000), vsync: this);
-//
-//     animation = Tween(begin: 1.0, end: 1.0).animate(controller)
-//       ..addListener(() {
-//         setState(() {
-//           _progress = animation.value;
-//         });
-//       });
-//
-//     controller.forward();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return CustomPaint(painter: LinePainter(_progress, Paint()));
-//   }
-// }
-//
-
-// class Line extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() => _LineState();
-// }
-//
-// class _LineState extends State<Line> with SingleTickerProviderStateMixin {
-//   double _progress = 0.0;
-//   late Animation<double> animation;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     var controller = AnimationController(
-//         duration: Duration(milliseconds: 3000), vsync: this);
-//
-//     animation = Tween(begin: 0.0, end: 1.0).animate(controller)
-//       ..addListener(() {
-//         setState(() {
-//           _progress = animation.value;
-//         });
-//       });
-//
-//     controller.forward();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return CustomPaint(painter: LinePainter(_progress, Paint()));
-//   }
-// }
-//
-// class LinePainter extends CustomPainter {
-//   Paint _paint;
-//   double _progress;
-//
-//   LinePainter(this._progress, this._paint) {
-//     _paint = Paint()
-//       ..color = Colors.green
-//       ..strokeWidth = 8.0;
-//   }
-//
-//   // @override
-// // void paint(Canvas canvas, Size size) {
-// //   canvas.drawLine(
-// //       Offset(0.0, 0.0),
-// //       Offset(size.width - size.width * _progress,
-// //           size.height - size.height * _progress),
-// //       _paint);
-// // }
-//
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     const left = 0.0;
-//     const top = 0.0;
-//     const right = 100.0;
-//     const bottom = 100.0;
-//     final rect = Rect.fromLTRB(left * _progress, top * _progress,
-//         right * _progress, bottom * _progress);
-//     // final rec = Rect.fromPoints(Offset(left, right), Offset(bottom, top));
-//     final paint = _paint
-//       ..color = Colors.black
-//       ..style = PaintingStyle.stroke
-//       ..strokeWidth = 4;
-//     // canvas.drawLine(paint);
-//     // canvas.drawLine(Offset(100.0 * _progress, 0.100 * _progress),
-//     // Offset(50.0, 0.100 * _progress), paint);
-//     // canvas.drawLine(Offset(left * _progress, right * _progress),
-//     //     Offset(right, left * _progress), paint);
-//
-//     // Timer(const Duration(milliseconds: 3000), () {});
-//
-//     //left
-//     canvas.drawLine(Offset(0.100, 100.100 * _progress),
-//         Offset(0.0 * _progress, 0.0 * _progress), paint);
-//
-//     //top
-//     canvas.drawLine(Offset(100.100, 0.100 * _progress),
-//         Offset(0.0 * _progress, 0.0 * _progress), paint);
-//     //right
-//     canvas.drawLine(Offset(100.0, 100.100 * _progress),
-//         Offset(100.0 * _progress, 0.100 * _progress), paint);
-//
-//     // Down
-//     canvas.drawLine(Offset(100.100, 100.100 * _progress),
-//         Offset(100.100 * _progress, 100.100 * _progress), paint);
-//
-//     // canvas.drawLine(Offset(100.100, 100.100 * _progress),
-//     //     Offset(100.100 * _progress, 100.100 * _progress), paint);
-//     // canvas.drawLine(Offset(100.100, 0.100 * _progress),
-//     //     Offset(0.0 * _progress, 0.0 * _progress), paint);
-//   }
-//
-//   @override
-//   bool shouldRepaint(LinePainter oldDelegate) {
-//     return oldDelegate._progress != _progress;
-//   }
-// }
-//
-// // void
-// // paint(Canvas canvas, Size size) {
-// //   final left = 50.0;
-// //   final top = 100.0;
-// //   final right = 250.0;
-// //   final bottom = 200.0;
-// //   final rect = Rect.fromLTRB(left, top, right, bottom);
-// //   final paint = Paint()
-// //     ..color = Colors.black
-// //     ..style = PaintingStyle.stroke
-// //     ..strokeWidth = 4;
-// //   canvas.drawRect(rect, paint);
-// // }

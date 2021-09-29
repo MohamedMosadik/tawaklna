@@ -96,55 +96,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
-    //   Scaffold(
-    //   body: _children[_currentIndex], // new
-    //   bottomNavigationBar: BottomNavigationBar(
-    //     onTap: onTabTapped,
-    //     showUnselectedLabels: true, // new
-    //     currentIndex: _currentIndex, // new
-    //     items: [
-    //       new BottomNavigationBarItem(
-    //         icon: Image(
-    //           image: AssetImage("assets/icon/12.png"),
-    //           height: 20,
-    //         ),
-    //         title: Text(
-    //           'حسابي',
-    //           style: TextStyle(color: Colors.black),
-    //         ),
-    //       ),
-    //       new BottomNavigationBarItem(
-    //         icon: Image(
-    //           image: AssetImage("assets/icon/11.png"),
-    //           height: 20,
-    //         ),
-    //         title: Text('لوحة البيانات', style: TextStyle(color: Colors.black)),
-    //       ),
-    //       new BottomNavigationBarItem(
-    //           icon: Image(
-    //             image: AssetImage("assets/icon/10.png"),
-    //             height: 20,
-    //           ),
-    //           title: Text(
-    //             'المحفظة الرقمية',
-    //             style: TextStyle(color: Colors.black, fontSize: 12),
-    //           )),
-    //       new BottomNavigationBarItem(
-    //           icon: Image(
-    //             image: AssetImage("assets/icon/9.png"),
-    //             height: 20,
-    //           ),
-    //           title: Text('الخدمات', style: TextStyle(color: Colors.black))),
-    //       new BottomNavigationBarItem(
-    //         icon: Image(
-    //           image: AssetImage("assets/icon/8.png"),
-    //           height: 20,
-    //         ),
-    //         title: Text('الرئيسية', style: TextStyle(color: Colors.black)),
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 
   Future<bool> onWillPop() {
@@ -262,6 +213,6 @@ class Init {
     // This is where you can initialize the resources needed by your app while
     // the splash screen is displayed.  Remove the following example because
     // delaying the user experience is a bad design practice!
-    await Future.delayed(const Duration(seconds: 0));
+    await Future.delayed(const Duration(seconds: 3));
   }
 }

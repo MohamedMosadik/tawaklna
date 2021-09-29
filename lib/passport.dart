@@ -44,7 +44,7 @@ class _PassportHealthState extends State<PassportHealth> {
                         Color(0xE1006837),
                       ],
                     )),
-                height: 150,
+                height: MediaQuery.of(context).size.height * 0.17,
                 child: Column(
                   children: [
                     Row(
@@ -91,43 +91,50 @@ class _PassportHealthState extends State<PassportHealth> {
                 ),
               ),
               Positioned(
-                bottom: 60,
-                left: 20,
+                bottom: MediaQuery.of(context).size.height * 0.08,
+                left: MediaQuery.of(context).size.width * 0.049,
                 child: GestureDetector(
                   onTap: () {
                     _bottomSheet(context, '$formatter');
                   },
                   child: Container(
                     height: 50,
-                    width: 390,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(15),
                             bottomRight: Radius.circular(15)),
                         color: Colors.teal),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Download Health Passport',
-                          style: TextStyle(color: Colors.white),
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 17,
                         ),
-                        SizedBox(
-                          width: 10,
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              'Download Health Passport',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Icon(
+                              Icons.picture_as_pdf_outlined,
+                              color: Colors.white,
+                            )
+                          ],
                         ),
-                        Icon(
-                          Icons.picture_as_pdf_outlined,
-                          color: Colors.white,
-                        )
                       ],
                     ),
                   ),
                 ),
               ),
               Positioned(
-                  top: 150,
-                  left: 20,
+                  top: MediaQuery.of(context).size.height * 0.17,
+                  left: MediaQuery.of(context).size.width * 0.05,
                   child: SingleChildScrollView(
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -139,7 +146,7 @@ class _PassportHealthState extends State<PassportHealth> {
                       ),
                       // color: Colors.black,
                       // height: 200,
-                      width: 390,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -321,72 +328,77 @@ class _PassportHealthState extends State<PassportHealth> {
     showModalBottomSheet(
         isScrollControlled: true,
         context: context,
+        constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.5,
+            maxHeight: MediaQuery.of(context).size.height * 0.7),
         builder: (BuildContext bC) {
           return Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            // height: MediaQuery.of(context).size.height * 0.7,
+            // margin: EdgeInsets.only(bottom: 200),
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 color: Colors.white),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    height: 50,
-                    color: Colors.grey[300],
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.close),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.upload_outlined),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+            child: Column(
+              children: [
+                Container(
+                  height: 50,
+                  color: Colors.grey[300],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.upload_outlined),
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Image(
-                      image: AssetImage('assets/images/25.jpg'),
-                      // height: MediaQuery.of(context).size.height * 0.4,
-                      fit: BoxFit.fill,
-                    ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: Image(
+                    image: AssetImage('assets/images/25.jpg'),
+                    // height: MediaQuery.of(context).size.height * 0.4,
+                    fit: BoxFit.fill,
                   ),
-                  const Divider(
-                    height: 10,
-                    thickness: 1,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(time),
-                        const Image(
-                          image: AssetImage('assets/images/20.png'),
-                          height: 20,
-                          fit: BoxFit.fill,
+                ),
+                const Divider(
+                  height: 10,
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(time),
+                      const Image(
+                        image: AssetImage('assets/images/20.png'),
+                        height: 20,
+                        fit: BoxFit.fill,
+                      ),
+                      const SizedBox(
+                        width: 100,
+                        child: Text(
+                          'Scan the QR code for electronic validation',
+                          style: TextStyle(fontSize: 10),
+                          maxLines: 2,
                         ),
-                        const SizedBox(
-                          width: 100,
-                          child: Text(
-                            'Scan the QR code for electronic validation',
-                            style: TextStyle(fontSize: 10),
-                            maxLines: 2,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                // SizedBox(
+                //   height: 100,
+                // )
+              ],
             ),
           );
         });
