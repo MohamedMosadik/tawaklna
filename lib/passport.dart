@@ -361,12 +361,19 @@ class _PassportHealthState extends State<PassportHealth> {
                     ],
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(15.0),
-                  child: Image(
-                    image: AssetImage('assets/images/25.jpg'),
-                    // height: MediaQuery.of(context).size.height * 0.4,
-                    fit: BoxFit.fill,
+                  child: GestureDetector(
+                    child: Hero(
+                        tag: 'imageHero',
+                        child: Image(
+                          image: AssetImage('assets/images/25.jpg'),
+                        )),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return DetailScreen();
+                      }));
+                    },
                   ),
                 ),
                 const Divider(
@@ -402,5 +409,25 @@ class _PassportHealthState extends State<PassportHealth> {
             ),
           );
         });
+  }
+}
+
+class DetailScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        child: Center(
+          child: Hero(
+              tag: 'imageHero',
+              child: Image(
+                image: AssetImage('assets/images/25.jpg'),
+              )),
+        ),
+        onTap: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
   }
 }
